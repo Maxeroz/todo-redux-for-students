@@ -1,6 +1,7 @@
 import { React, useRef, useState } from 'react';
 import './todo-field.css';
 import { useDispatch } from 'react-redux';
+import { completeTodo } from '../../../store';
 
 const TodoField = ({ text, id, status }) => {
     const [disabled, setDisabled] = useState(false);
@@ -30,6 +31,9 @@ const TodoField = ({ text, id, status }) => {
         }
     };
 
+    // Функция handler для отметки task = выполнено.
+    const handleComplete = () => dispatch(completeTodo(id));
+
     return (
         <div className="fieldWraper">
             {disabled ? (
@@ -54,7 +58,9 @@ const TodoField = ({ text, id, status }) => {
             <button className="delBtn" onClick={deleteTodo}>
                 🗑️
             </button>
-            <button className="complitedBtn">✔️</button>
+            <button className="complitedBtn" onClick={handleComplete}>
+                ✔️
+            </button>
         </div>
     );
 };
